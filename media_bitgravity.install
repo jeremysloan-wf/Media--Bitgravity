@@ -1,0 +1,27 @@
+<?php
+// $Id:$
+
+/**
+ * @file
+ * This is Media: Bitgravity's installation, configuration, and removal file.
+ */
+
+/**
+ * Implementation of hook_install().
+ */
+function media_bitgravity_install() {
+  // Ensure we have the required variable namespace.
+  drupal_load('module', 'media_bitgravity');
+
+  return true;
+}
+
+/**
+ * Implementation of hook_uninstall().
+ */
+function media_bitgravity_uninstall() {
+  foreach (media_bitgravity_variable_default() as $variable => $value) {
+    media_bitgravity_variable_del($variable);
+  }
+  return array(array('success' => TRUE, 'query' => "Deleted all variables in the Media: Bitgravity namespace."));
+}
